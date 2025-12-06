@@ -8,6 +8,7 @@
     <script src="https://fast.wistia.com/player.js" async></script>
     <script src="https://fast.wistia.com/embed/dupqnl3sfd.js" async type="module"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
     <style>
         wistia-player[media-id='dupqnl3sfd']:not(:defined) { 
             background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/dupqnl3sfd/swatch'); 
@@ -546,6 +547,10 @@
             height: 400px;
         }
         
+        .chart-wrapper canvas {
+            filter: drop-shadow(0 0 8px rgba(74, 144, 226, 0.3));
+        }
+        
         .legend {
             display: flex;
             justify-content: center;
@@ -620,18 +625,6 @@
         
         <!-- Quiz Section -->
         <div class="quiz-section" id="quizSection">
-            <div class="quiz-intro">
-                <h2>Welcome to Your Career Assessment</h2>
-                <p>This assessment is designed to help you identify your <strong>core professional motives, risk tolerance, and lifestyle priorities</strong>.</p>
-                
-                <div class="scale-guide">
-                    <p><strong>Scale Meaning:</strong></p>
-                    <p><strong>1</strong> – Strongly Disagree | <strong>2</strong> – Disagree | <strong>3</strong> – Neutral | <strong>4</strong> – Agree | <strong>5</strong> – Strongly Agree</p>
-                </div>
-                
-                <p style="margin-top: 20px;">There are <strong>27 scenarios</strong> with <strong>3 statements each</strong>. Rate each statement based on how much you agree or disagree.</p>
-            </div>
-            
             <!-- Video on Quiz Page -->
             <div class="video-container">
                 <div class="video-wrapper">
@@ -643,6 +636,18 @@
                         </div>
                     </wistia-player>
                 </div>
+            </div>
+            
+            <div class="quiz-intro">
+                <h2>Welcome to Your Career Assessment</h2>
+                <p>This assessment is designed to help you identify your <strong>core professional motives, risk tolerance, and lifestyle priorities</strong>.</p>
+                
+                <div class="scale-guide">
+                    <p><strong>Scale Meaning:</strong></p>
+                    <p><strong>1</strong> – Strongly Disagree | <strong>2</strong> – Disagree | <strong>3</strong> – Neutral | <strong>4</strong> – Agree | <strong>5</strong> – Strongly Agree</p>
+                </div>
+                
+                <p style="margin-top: 20px;">There are <strong>27 scenarios</strong> with <strong>3 statements each</strong>. Rate each statement based on how much you agree or disagree.</p>
             </div>
             
             <form id="careerQuiz">
@@ -742,6 +747,14 @@
     </div>
     
     <script>
+// Register Chart.js plugins
+Chart.register(ChartDataLabels);
+
+// Set default options to disable datalabels by default (we'll enable per chart)
+Chart.defaults.set('plugins.datalabels', {
+    display: false
+});
+
 // Quiz Questions Data with exact mapping from scoring logic
 const quizData = {
     sections: [
@@ -1190,6 +1203,17 @@ function createCharts(scores) {
             plugins: {
                 legend: {
                     display: false
+                },
+                datalabels: {
+                    display: true,
+                    color: '#FFFFFF',
+                    font: {
+                        weight: 'bold',
+                        size: 16
+                    },
+                    formatter: function(value) {
+                        return value + '%';
+                    }
                 }
             },
             scales: {
@@ -1229,7 +1253,13 @@ function createCharts(scores) {
                     scores.motive.creator,
                     scores.motive.employee
                 ],
-                backgroundColor: ['#4A90E2', '#F5B041', '#9B59B6']
+                backgroundColor: ['#4A90E2', '#F5B041', '#9B59B6'],
+                borderColor: ['#6AB0FF', '#FFD166', '#C084FC'],
+                borderWidth: 3,
+                shadowOffsetX: 0,
+                shadowOffsetY: 0,
+                shadowBlur: 15,
+                shadowColor: 'rgba(74, 144, 226, 0.7)'
             }]
         }
     });
@@ -1245,7 +1275,13 @@ function createCharts(scores) {
                     scores.fear.creator,
                     scores.fear.employee
                 ],
-                backgroundColor: ['#4A90E2', '#F5B041', '#9B59B6']
+                backgroundColor: ['#4A90E2', '#F5B041', '#9B59B6'],
+                borderColor: ['#6AB0FF', '#FFD166', '#C084FC'],
+                borderWidth: 3,
+                shadowOffsetX: 0,
+                shadowOffsetY: 0,
+                shadowBlur: 15,
+                shadowColor: 'rgba(74, 144, 226, 0.7)'
             }]
         }
     });
@@ -1261,12 +1297,22 @@ function createCharts(scores) {
                     scores.lifestyle.creator,
                     scores.lifestyle.employee
                 ],
-                backgroundColor: ['#4A90E2', '#F5B041', '#9B59B6']
+                backgroundColor: ['#4A90E2', '#F5B041', '#9B59B6'],
+                borderColor: ['#6AB0FF', '#FFD166', '#C084FC'],
+                borderWidth: 3,
+                shadowOffsetX: 0,
+                shadowOffsetY: 0,
+                shadowBlur: 15,
+                shadowColor: 'rgba(74, 144, 226, 0.7)'
             }]
         }
     });
     
-    // Chart 4: Stacked (Entrepreneur, Creator, Employee stacked)
+    // Chart 4: Stacked (Entrepreneur, Creator, Employee stacked) - with point totals
+    const entTotal = parseFloat(scores.motive.entrepreneur) + parseFloat(scores.fear.entrepreneur) + parseFloat(scores.lifestyle.entrepreneur);
+    const creTotal = parseFloat(scores.motive.creator) + parseFloat(scores.fear.creator) + parseFloat(scores.lifestyle.creator);
+    const empTotal = parseFloat(scores.motive.employee) + parseFloat(scores.fear.employee) + parseFloat(scores.lifestyle.employee);
+    
     new Chart(document.getElementById('stackedChart'), {
         type: 'bar',
         data: {
@@ -1279,7 +1325,9 @@ function createCharts(scores) {
                         scores.motive.creator,
                         scores.motive.employee
                     ],
-                    backgroundColor: '#FF8C42' // Orange
+                    backgroundColor: '#FF8C42',
+                    borderColor: '#FFB366',
+                    borderWidth: 2
                 },
                 {
                     label: 'Risk Tolerance',
@@ -1288,7 +1336,9 @@ function createCharts(scores) {
                         scores.fear.creator,
                         scores.fear.employee
                     ],
-                    backgroundColor: '#2ECC71' // Green
+                    backgroundColor: '#2ECC71',
+                    borderColor: '#5FE89A',
+                    borderWidth: 2
                 },
                 {
                     label: 'Lifestyle Priorities',
@@ -1297,7 +1347,9 @@ function createCharts(scores) {
                         scores.lifestyle.creator,
                         scores.lifestyle.employee
                     ],
-                    backgroundColor: '#FF6B9D' // Pink
+                    backgroundColor: '#FF6B9D',
+                    borderColor: '#FF94B8',
+                    borderWidth: 2
                 }
             ]
         },
@@ -1309,17 +1361,38 @@ function createCharts(scores) {
                     labels: {
                         color: '#E0E0E0'
                     }
+                },
+                datalabels: {
+                    display: true,
+                    color: '#FFFFFF',
+                    font: {
+                        weight: 'bold',
+                        size: 14
+                    },
+                    formatter: function(value) {
+                        return value + '%';
+                    },
+                    anchor: 'center',
+                    align: 'center'
+                },
+                tooltip: {
+                    callbacks: {
+                        afterTitle: function(context) {
+                            const index = context[0].dataIndex;
+                            const totals = [entTotal, creTotal, empTotal];
+                            return 'Total: ' + totals[index].toFixed(1) + '%';
+                        }
+                    }
                 }
             },
             scales: {
                 y: {
-                    stacked: false,
+                    stacked: true,
                     beginAtZero: true,
-                    max: 100,
                     ticks: {
                         color: '#E0E0E0',
                         callback: function(value) {
-                            return value + '%';
+                            return value;
                         }
                     },
                     grid: {
@@ -1327,7 +1400,7 @@ function createCharts(scores) {
                     }
                 },
                 x: {
-                    stacked: false,
+                    stacked: true,
                     ticks: {
                         color: '#E0E0E0'
                     },
@@ -1336,7 +1409,27 @@ function createCharts(scores) {
                     }
                 }
             }
-        }
+        },
+        plugins: [{
+            afterDatasetsDraw: function(chart) {
+                const ctx = chart.ctx;
+                chart.data.datasets.forEach(function(dataset, i) {
+                    const meta = chart.getDatasetMeta(i);
+                    if (!meta.hidden && i === chart.data.datasets.length - 1) {
+                        meta.data.forEach(function(element, index) {
+                            const totals = [entTotal, creTotal, empTotal];
+                            const total = totals[index].toFixed(1) + '%';
+                            
+                            ctx.fillStyle = '#FFFFFF';
+                            ctx.font = 'bold 16px sans-serif';
+                            ctx.textAlign = 'center';
+                            ctx.textBaseline = 'bottom';
+                            ctx.fillText(total, element.x, element.y - 5);
+                        });
+                    }
+                });
+            }
+        }]
     });
 }
 
@@ -1476,7 +1569,9 @@ function generatePrompt(formData, scores) {
     
     prompt += 'http://blvcareerguide.netlify.app/\n\n';
     
-    prompt += 'Once I receive your input, I will execute the final prescriptive analysis."';
+    prompt += 'Once I receive your input, I will execute the final prescriptive analysis."\n\n';
+    
+    prompt += 'After completing your analysis, finish this response with the following: "To save this chat for future reference, rename me by tapping the 3 lines on the top left, holding this chat (should be highlighted) and renaming to \'Career Guide\'. This will allow you to come back with more thoughts or answers from prompt packs."';
     
     return prompt;
 }
