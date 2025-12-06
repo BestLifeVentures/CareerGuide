@@ -534,6 +534,24 @@
             border: 1px solid var(--light-purple);
         }
         
+        #motiveChart {
+            background: rgba(255, 140, 66, 0.1);
+            border-radius: 8px;
+            padding: 10px;
+        }
+        
+        #fearChart {
+            background: rgba(46, 204, 113, 0.1);
+            border-radius: 8px;
+            padding: 10px;
+        }
+        
+        #lifestyleChart {
+            background: rgba(255, 107, 157, 0.1);
+            border-radius: 8px;
+            padding: 10px;
+        }
+        
         .chart-title {
             font-family: 'Playfair Display', serif;
             font-size: 1.5rem;
@@ -1242,7 +1260,7 @@ function createCharts(scores) {
         }
     };
     
-    // Chart 1: Core Motive
+    // Chart 1: Core Motive (Orange background)
     new Chart(document.getElementById('motiveChart'), {
         ...chartConfig,
         data: {
@@ -1261,10 +1279,20 @@ function createCharts(scores) {
                 shadowBlur: 15,
                 shadowColor: 'rgba(74, 144, 226, 0.7)'
             }]
+        },
+        options: {
+            ...chartConfig.options,
+            plugins: {
+                ...chartConfig.options.plugins,
+                title: {
+                    display: false
+                }
+            },
+            backgroundColor: 'rgba(255, 140, 66, 0.15)' // Orange tint
         }
     });
     
-    // Chart 2: Risk Tolerance
+    // Chart 2: Risk Tolerance (Green background)
     new Chart(document.getElementById('fearChart'), {
         ...chartConfig,
         data: {
@@ -1283,10 +1311,14 @@ function createCharts(scores) {
                 shadowBlur: 15,
                 shadowColor: 'rgba(74, 144, 226, 0.7)'
             }]
+        },
+        options: {
+            ...chartConfig.options,
+            backgroundColor: 'rgba(46, 204, 113, 0.15)' // Green tint
         }
     });
     
-    // Chart 3: Lifestyle
+    // Chart 3: Lifestyle (Pink background)
     new Chart(document.getElementById('lifestyleChart'), {
         ...chartConfig,
         data: {
@@ -1305,6 +1337,10 @@ function createCharts(scores) {
                 shadowBlur: 15,
                 shadowColor: 'rgba(74, 144, 226, 0.7)'
             }]
+        },
+        options: {
+            ...chartConfig.options,
+            backgroundColor: 'rgba(255, 107, 157, 0.15)' // Pink tint
         }
     });
     
@@ -1392,7 +1428,7 @@ function createCharts(scores) {
                     ticks: {
                         color: '#E0E0E0',
                         callback: function(value) {
-                            return value;
+                            return value; // No percentage sign
                         }
                     },
                     grid: {
@@ -1418,7 +1454,7 @@ function createCharts(scores) {
                     if (!meta.hidden && i === chart.data.datasets.length - 1) {
                         meta.data.forEach(function(element, index) {
                             const totals = [entTotal, creTotal, empTotal];
-                            const total = totals[index].toFixed(1) + '%';
+                            const total = totals[index].toFixed(1); // No percentage sign
                             
                             ctx.fillStyle = '#FFFFFF';
                             ctx.font = 'bold 16px sans-serif';
