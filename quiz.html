@@ -1152,26 +1152,30 @@ function calculateScores(formData) {
     
     console.log(`Lifestyle Totals: E=${scores.lifestyle.entrepreneur}, C=${scores.lifestyle.creator}, Emp=${scores.lifestyle.employee}`);
     
-    // Convert to percentages (max score per section = 45)
+    // Convert to relative percentages (each section sums to 100%)
+    const motiveTotal = scores.motive.entrepreneur + scores.motive.creator + scores.motive.employee;
+    const fearTotal = scores.fear.entrepreneur + scores.fear.creator + scores.fear.employee;
+    const lifestyleTotal = scores.lifestyle.entrepreneur + scores.lifestyle.creator + scores.lifestyle.employee;
+    
     const percentages = {
         motive: {
-            entrepreneur: ((scores.motive.entrepreneur / 45) * 100).toFixed(1),
-            creator: ((scores.motive.creator / 45) * 100).toFixed(1),
-            employee: ((scores.motive.employee / 45) * 100).toFixed(1)
+            entrepreneur: ((scores.motive.entrepreneur / motiveTotal) * 100).toFixed(1),
+            creator: ((scores.motive.creator / motiveTotal) * 100).toFixed(1),
+            employee: ((scores.motive.employee / motiveTotal) * 100).toFixed(1)
         },
         fear: {
-            entrepreneur: ((scores.fear.entrepreneur / 45) * 100).toFixed(1),
-            creator: ((scores.fear.creator / 45) * 100).toFixed(1),
-            employee: ((scores.fear.employee / 45) * 100).toFixed(1)
+            entrepreneur: ((scores.fear.entrepreneur / fearTotal) * 100).toFixed(1),
+            creator: ((scores.fear.creator / fearTotal) * 100).toFixed(1),
+            employee: ((scores.fear.employee / fearTotal) * 100).toFixed(1)
         },
         lifestyle: {
-            entrepreneur: ((scores.lifestyle.entrepreneur / 45) * 100).toFixed(1),
-            creator: ((scores.lifestyle.creator / 45) * 100).toFixed(1),
-            employee: ((scores.lifestyle.employee / 45) * 100).toFixed(1)
+            entrepreneur: ((scores.lifestyle.entrepreneur / lifestyleTotal) * 100).toFixed(1),
+            creator: ((scores.lifestyle.creator / lifestyleTotal) * 100).toFixed(1),
+            employee: ((scores.lifestyle.employee / lifestyleTotal) * 100).toFixed(1)
         }
     };
     
-    console.log('=== PERCENTAGES ===', percentages);
+    console.log('=== PERCENTAGES (sum to 100% per section) ===', percentages);
     
     return percentages;
 }
@@ -1309,9 +1313,9 @@ function createCharts(scores) {
             },
             scales: {
                 y: {
-                    stacked: true,
+                    stacked: false,
                     beginAtZero: true,
-                    max: 300,
+                    max: 100,
                     ticks: {
                         color: '#E0E0E0',
                         callback: function(value) {
@@ -1323,7 +1327,7 @@ function createCharts(scores) {
                     }
                 },
                 x: {
-                    stacked: true,
+                    stacked: false,
                     ticks: {
                         color: '#E0E0E0'
                     },
