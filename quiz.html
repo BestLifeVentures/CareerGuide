@@ -1528,6 +1528,27 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Back to quiz button
     document.getElementById('backToQuizBtn').addEventListener('click', function() {
+        // Restore all slider values from saved form data
+        if (savedFormData) {
+            // Restore text fields
+            document.getElementById('uniqueId').value = savedFormData.get('uniqueId') || '';
+            document.getElementById('email').value = savedFormData.get('email') || '';
+            document.getElementById('name').value = savedFormData.get('name') || '';
+            
+            // Restore all slider values
+            for (let q = 1; q <= 27; q++) {
+                for (let opt = 0; opt <= 2; opt++) {
+                    const slider = document.getElementById(`q${q}_${opt}`);
+                    if (slider) {
+                        const value = savedFormData.get(`q${q}_${opt}`);
+                        if (value) {
+                            slider.value = value;
+                        }
+                    }
+                }
+            }
+        }
+        
         document.getElementById('resultsSection').style.display = 'none';
         document.getElementById('quizSection').classList.remove('hidden');
         window.scrollTo({ top: 0, behavior: 'smooth' });
