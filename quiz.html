@@ -534,30 +534,35 @@
             border: 1px solid var(--light-purple);
         }
         
-        #motiveChart {
-            background: rgba(255, 140, 66, 0.1);
-            border-radius: 8px;
-            padding: 10px;
-        }
-        
-        #fearChart {
-            background: rgba(46, 204, 113, 0.1);
-            border-radius: 8px;
-            padding: 10px;
-        }
-        
-        #lifestyleChart {
-            background: rgba(255, 107, 157, 0.1);
-            border-radius: 8px;
-            padding: 10px;
-        }
-        
         .chart-title {
             font-family: 'Playfair Display', serif;
             font-size: 1.5rem;
             color: var(--white);
             margin-bottom: 20px;
             text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .chart-title-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 3px;
+            display: inline-block;
+        }
+        
+        .chart-title-icon.orange {
+            background: #FF8C42;
+        }
+        
+        .chart-title-icon.green {
+            background: #2ECC71;
+        }
+        
+        .chart-title-icon.pink {
+            background: #FF6B9D;
         }
         
         .chart-wrapper {
@@ -712,7 +717,10 @@
             </div>
             
             <div class="chart-container">
-                <h3 class="chart-title">Core Motive (The Root Drive)</h3>
+                <h3 class="chart-title">
+                    <span class="chart-title-icon orange"></span>
+                    Core Motive (The Root Drive)
+                </h3>
                 <div class="chart-wrapper">
                     <canvas id="motiveChart"></canvas>
                 </div>
@@ -733,14 +741,20 @@
             </div>
             
             <div class="chart-container">
-                <h3 class="chart-title">Risk Tolerance (The Core Fear)</h3>
+                <h3 class="chart-title">
+                    <span class="chart-title-icon green"></span>
+                    Risk Tolerance (The Core Fear)
+                </h3>
                 <div class="chart-wrapper">
                     <canvas id="fearChart"></canvas>
                 </div>
             </div>
             
             <div class="chart-container">
-                <h3 class="chart-title">Lifestyle Priorities (The Root Fuel)</h3>
+                <h3 class="chart-title">
+                    <span class="chart-title-icon pink"></span>
+                    Lifestyle Priorities (The Root Fuel)
+                </h3>
                 <div class="chart-wrapper">
                     <canvas id="lifestyleChart"></canvas>
                 </div>
@@ -1260,7 +1274,7 @@ function createCharts(scores) {
         }
     };
     
-    // Chart 1: Core Motive (Orange background)
+    // Chart 1: Core Motive (All bars orange)
     new Chart(document.getElementById('motiveChart'), {
         ...chartConfig,
         data: {
@@ -1271,13 +1285,13 @@ function createCharts(scores) {
                     scores.motive.creator,
                     scores.motive.employee
                 ],
-                backgroundColor: ['#4A90E2', '#F5B041', '#9B59B6'],
-                borderColor: ['#6AB0FF', '#FFD166', '#C084FC'],
+                backgroundColor: ['#FF8C42', '#FF8C42', '#FF8C42'], // All orange
+                borderColor: ['#FFB366', '#FFB366', '#FFB366'], // Orange border
                 borderWidth: 3,
                 shadowOffsetX: 0,
                 shadowOffsetY: 0,
                 shadowBlur: 15,
-                shadowColor: 'rgba(74, 144, 226, 0.7)'
+                shadowColor: 'rgba(255, 140, 66, 0.7)'
             }]
         },
         options: {
@@ -1287,12 +1301,11 @@ function createCharts(scores) {
                 title: {
                     display: false
                 }
-            },
-            backgroundColor: 'rgba(255, 140, 66, 0.15)' // Orange tint
+            }
         }
     });
     
-    // Chart 2: Risk Tolerance (Green background)
+    // Chart 2: Risk Tolerance (All bars green)
     new Chart(document.getElementById('fearChart'), {
         ...chartConfig,
         data: {
@@ -1303,22 +1316,21 @@ function createCharts(scores) {
                     scores.fear.creator,
                     scores.fear.employee
                 ],
-                backgroundColor: ['#4A90E2', '#F5B041', '#9B59B6'],
-                borderColor: ['#6AB0FF', '#FFD166', '#C084FC'],
+                backgroundColor: ['#2ECC71', '#2ECC71', '#2ECC71'], // All green
+                borderColor: ['#5FE89A', '#5FE89A', '#5FE89A'], // Green border
                 borderWidth: 3,
                 shadowOffsetX: 0,
                 shadowOffsetY: 0,
                 shadowBlur: 15,
-                shadowColor: 'rgba(74, 144, 226, 0.7)'
+                shadowColor: 'rgba(46, 204, 113, 0.7)'
             }]
         },
         options: {
-            ...chartConfig.options,
-            backgroundColor: 'rgba(46, 204, 113, 0.15)' // Green tint
+            ...chartConfig.options
         }
     });
     
-    // Chart 3: Lifestyle (Pink background)
+    // Chart 3: Lifestyle (All bars pink)
     new Chart(document.getElementById('lifestyleChart'), {
         ...chartConfig,
         data: {
@@ -1329,18 +1341,17 @@ function createCharts(scores) {
                     scores.lifestyle.creator,
                     scores.lifestyle.employee
                 ],
-                backgroundColor: ['#4A90E2', '#F5B041', '#9B59B6'],
-                borderColor: ['#6AB0FF', '#FFD166', '#C084FC'],
+                backgroundColor: ['#FF6B9D', '#FF6B9D', '#FF6B9D'], // All pink
+                borderColor: ['#FF94B8', '#FF94B8', '#FF94B8'], // Pink border
                 borderWidth: 3,
                 shadowOffsetX: 0,
                 shadowOffsetY: 0,
                 shadowBlur: 15,
-                shadowColor: 'rgba(74, 144, 226, 0.7)'
+                shadowColor: 'rgba(255, 107, 157, 0.7)'
             }]
         },
         options: {
-            ...chartConfig.options,
-            backgroundColor: 'rgba(255, 107, 157, 0.15)' // Pink tint
+            ...chartConfig.options
         }
     });
     
