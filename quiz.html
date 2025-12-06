@@ -16,6 +16,13 @@
             padding-top:56.25%; 
         }
         
+        wistia-player[media-id='ftv48n5hj9']:not(:defined) { 
+            background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/ftv48n5hj9/swatch'); 
+            display: block; 
+            filter: blur(5px); 
+            padding-top:56.25%; 
+        }
+        
         * {
             margin: 0;
             padding: 0;
@@ -404,6 +411,103 @@
             transform: translateY(-1px);
         }
         
+        .back-btn {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            border: none;
+            padding: 14px 40px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 5px 20px rgba(231, 76, 60, 0.4);
+            font-family: 'Source Sans Pro', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 20px;
+        }
+        
+        .back-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(231, 76, 60, 0.6);
+        }
+        
+        .back-btn:active {
+            transform: translateY(-1px);
+        }
+        
+        .prompt-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 30px;
+            margin-top: 40px;
+            border: 1px solid var(--light-purple);
+            text-align: center;
+        }
+        
+        .prompt-btn {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            color: white;
+            border: none;
+            padding: 18px 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 5px 20px rgba(39, 174, 96, 0.4);
+            font-family: 'Source Sans Pro', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+        
+        .prompt-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(39, 174, 96, 0.6);
+        }
+        
+        .prompt-btn:active {
+            transform: translateY(-1px);
+        }
+        
+        .prompt-instruction {
+            color: var(--light-gray);
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+        
+        .prompt-note {
+            color: var(--medium-gray);
+            font-size: 0.85rem;
+            font-style: italic;
+        }
+        
+        .prompt-output {
+            display: none;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--light-purple);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: left;
+            max-height: 400px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: var(--light-gray);
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        .copy-success {
+            display: none;
+            color: #2ecc71;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+        
         /* Results Page Styles */
         .results-section {
             display: none;
@@ -573,6 +677,16 @@
                 <p class="helper-text">Based on your responses, here's your breakdown across three dimensions</p>
             </div>
             
+            <!-- Second Video -->
+            <div class="video-container">
+                <div class="video-wrapper">
+                    <wistia-player media-id="ftv48n5hj9" aspect="1.7777777777777777"></wistia-player>
+                </div>
+                <div style="text-align: center;">
+                    <button type="button" class="back-btn" id="backToQuizBtn">I wasn't truthful, go back</button>
+                </div>
+            </div>
+            
             <div class="chart-container">
                 <h3 class="chart-title">Core Motive (The Root Drive)</h3>
                 <div class="chart-wrapper">
@@ -609,17 +723,19 @@
             </div>
             
             <div class="chart-container">
-                <h3 class="chart-title">Complete Profile Overview</h3>
-                <div class="chart-wrapper">
-                    <canvas id="overviewChart"></canvas>
-                </div>
-            </div>
-            
-            <div class="chart-container">
                 <h3 class="chart-title">Stacked Archetype Comparison</h3>
                 <div class="chart-wrapper">
                     <canvas id="stackedChart"></canvas>
                 </div>
+            </div>
+            
+            <!-- Get Prompt Section -->
+            <div class="prompt-section">
+                <button type="button" class="prompt-btn" id="getPromptBtn">Get Prompt</button>
+                <p class="prompt-instruction">Paste this into Gemini or other AI tools</p>
+                <p class="prompt-note">(Gemini recommended for non pro users. Has more free credits)</p>
+                <div class="copy-success" id="copySuccess">✓ Copied to clipboard!</div>
+                <div class="prompt-output" id="promptOutput"></div>
             </div>
         </div>
     </div>
@@ -1121,47 +1237,7 @@ function createCharts(scores) {
         }
     });
     
-    // Chart 4: Overview (All 9 categories)
-    new Chart(document.getElementById('overviewChart'), {
-        ...chartConfig,
-        data: {
-            labels: [
-                'Motive: Entr.',
-                'Motive: Creator',
-                'Motive: Empl.',
-                'Fear: Entr.',
-                'Fear: Creator',
-                'Fear: Empl.',
-                'Lifestyle: Entr.',
-                'Lifestyle: Creator',
-                'Lifestyle: Empl.'
-            ],
-            datasets: [{
-                data: [
-                    scores.motive.entrepreneur,
-                    scores.motive.creator,
-                    scores.motive.employee,
-                    scores.fear.entrepreneur,
-                    scores.fear.creator,
-                    scores.fear.employee,
-                    scores.lifestyle.entrepreneur,
-                    scores.lifestyle.creator,
-                    scores.lifestyle.employee
-                ],
-                backgroundColor: [
-                    '#4A90E2', '#F5B041', '#9B59B6',
-                    '#4A90E2', '#F5B041', '#9B59B6',
-                    '#4A90E2', '#F5B041', '#9B59B6'
-                ]
-            }]
-        },
-        options: {
-            ...chartConfig.options,
-            indexAxis: 'y'
-        }
-    });
-    
-    // Chart 5: Stacked (Entrepreneur, Creator, Employee stacked)
+    // Chart 4: Stacked (Entrepreneur, Creator, Employee stacked)
     new Chart(document.getElementById('stackedChart'), {
         type: 'bar',
         data: {
@@ -1239,11 +1315,16 @@ function createCharts(scores) {
 document.addEventListener('DOMContentLoaded', function() {
     generateQuestions();
     
+    let savedFormData = null;
+    let savedScores = null;
+    
     document.getElementById('careerQuiz').addEventListener('submit', function(e) {
         e.preventDefault();
         
         const formData = new FormData(this);
+        savedFormData = formData;
         const scores = calculateScores(formData);
+        savedScores = scores;
         
         // Hide quiz, show results
         document.getElementById('quizSection').classList.add('hidden');
@@ -1263,7 +1344,113 @@ document.addEventListener('DOMContentLoaded', function() {
             scores: scores
         });
     });
+    
+    // Back to quiz button
+    document.getElementById('backToQuizBtn').addEventListener('click', function() {
+        document.getElementById('resultsSection').style.display = 'none';
+        document.getElementById('quizSection').classList.remove('hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    
+    // Get Prompt button
+    document.getElementById('getPromptBtn').addEventListener('click', function() {
+        if (!savedFormData || !savedScores) {
+            alert('Please complete the quiz first!');
+            return;
+        }
+        
+        // Generate the full prompt with all data
+        let promptText = generatePrompt(savedFormData, savedScores);
+        
+        // Copy to clipboard
+        navigator.clipboard.writeText(promptText).then(function() {
+            document.getElementById('copySuccess').style.display = 'block';
+            document.getElementById('promptOutput').textContent = promptText;
+            document.getElementById('promptOutput').style.display = 'block';
+            
+            setTimeout(function() {
+                document.getElementById('copySuccess').style.display = 'none';
+            }, 3000);
+        }, function(err) {
+            alert('Failed to copy to clipboard. Please try again.');
+        });
+    });
 });
+
+function generatePrompt(formData, scores) {
+    let prompt = "ROLE: You are a Career Psychology Analyst specialized in Self-Determination Theory (SDT). Your primary function is to integrate the user's pre-analyzed quantitative data (81 scores & 9 key ratings) with their final qualitative insights to define their optimal professional structure. Your tone must be expert, prescriptive, and action-oriented.\n\n";
+    
+    prompt += "🧭 EXPERIENCE OVERVIEW FOR THE USER\n";
+    prompt += "Rundown: Your comprehensive Alignment Blueprint scores are processed. This is the final, quick step to provide the qualitative context necessary for me to deliver your comprehensive professional prescription.\n\n";
+    
+    prompt += "PHASE 1: ASSUMED DATA & CONVERSATIONAL ACQUISITION\n\n";
+    
+    prompt += "1. ALIGNMENT BLUEPRINT SCORES (Processed Data):\n\n";
+    
+    prompt += "=== INDIVIDUAL QUESTION SCORES (81 total) ===\n\n";
+    
+    // Section 1: Core Motive
+    prompt += "SECTION 1: CORE MOTIVE (The Root Drive)\n";
+    for (let q = 1; q <= 9; q++) {
+        prompt += `Question ${q}:\n`;
+        prompt += `  - Entrepreneur (Significance & Legacy): ${formData.get(`q${q}_0`)}/5\n`;
+        prompt += `  - Creator (Authenticity & Connection): ${formData.get(`q${q}_1`)}/5\n`;
+        prompt += `  - Employee (Competence & Belonging): ${formData.get(`q${q}_2`)}/5\n`;
+    }
+    
+    // Section 2: Risk Tolerance
+    prompt += "\nSECTION 2: RISK TOLERANCE (The Core Fear)\n";
+    for (let q = 10; q <= 18; q++) {
+        prompt += `Question ${q}:\n`;
+        prompt += `  - Entrepreneur (Loss of Agency & System): ${formData.get(`q${q}_0`)}/5\n`;
+        prompt += `  - Creator (Loss of Voice & Relevance): ${formData.get(`q${q}_1`)}/5\n`;
+        prompt += `  - Employee (Loss of Security & Status): ${formData.get(`q${q}_2`)}/5\n`;
+    }
+    
+    // Section 3: Lifestyle
+    prompt += "\nSECTION 3: LIFESTYLE PRIORITIES (The Root Fuel)\n";
+    for (let q = 19; q <= 27; q++) {
+        prompt += `Question ${q}:\n`;
+        prompt += `  - Entrepreneur (Unstructured Creation & Growth): ${formData.get(`q${q}_0`)}/5\n`;
+        prompt += `  - Creator (Flow, Experience & Translation): ${formData.get(`q${q}_1`)}/5\n`;
+        prompt += `  - Employee (Mastery, Boundaries & Disengagement): ${formData.get(`q${q}_2`)}/5\n`;
+    }
+    
+    prompt += "\n=== 9 KEY METRIC RATINGS (Percentage Scores) ===\n\n";
+    
+    prompt += "CORE MOTIVE:\n";
+    prompt += `  - Entrepreneur (Significance & Legacy): ${scores.motive.entrepreneur}%\n`;
+    prompt += `  - Creator (Authenticity & Connection): ${scores.motive.creator}%\n`;
+    prompt += `  - Employee (Competence & Belonging): ${scores.motive.employee}%\n\n`;
+    
+    prompt += "RISK TOLERANCE:\n";
+    prompt += `  - Entrepreneur (Loss of Agency): ${scores.fear.entrepreneur}%\n`;
+    prompt += `  - Creator (Loss of Voice): ${scores.fear.creator}%\n`;
+    prompt += `  - Employee (Loss of Security): ${scores.fear.employee}%\n\n`;
+    
+    prompt += "LIFESTYLE PRIORITIES:\n";
+    prompt += `  - Entrepreneur (Unstructured Growth): ${scores.lifestyle.entrepreneur}%\n`;
+    prompt += `  - Creator (Flow & Experience): ${scores.lifestyle.creator}%\n`;
+    prompt += `  - Employee (Mastery & Boundaries): ${scores.lifestyle.employee}%\n\n`;
+    
+    prompt += "• ASSUMPTION: The 81 quantitative scores and the 9 preliminary metric ratings (the core vectors like Motive V_A, Risk V_C) are already stored and available for use in the final analysis (Phase 2).\n\n";
+    
+    prompt += "CONVERSATIONAL DATA GATHERING MANDATE (CRUCIAL)\n\n";
+    
+    prompt += 'ACTION MANDATE: Immediately after the user confirms the scores are processed, or upon the next user interaction, you must issue a single, concise conversational prompt using the exact text below to collect the final qualitative data.\n\n';
+    
+    prompt += 'PROMPT TEMPLATE (Use this text):\n\n';
+    
+    prompt += '"Your Alignment Blueprint data has been collected and analyzed. To generate a high-quality, personalized response that links your specific career skills to your personality, I need your final contextual insights.\n\n';
+    
+    prompt += 'To gather the specific career insights I need to complete your personalized analysis, please follow the Guided Insight Tool below. Once you complete the steps on the site, copy and paste the results back here:\n\n';
+    
+    prompt += 'http://blvcareerguide.netlify.app/\n\n';
+    
+    prompt += 'Once I receive your input, I will execute the final prescriptive analysis."';
+    
+    return prompt;
+}
 
 function sendToDatabase(data) {
     // Implement your database submission endpoint here
