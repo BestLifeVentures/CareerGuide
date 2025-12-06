@@ -618,18 +618,6 @@
             <div class="divider"></div>
         </header>
         
-        <div class="video-container">
-            <div class="video-wrapper">
-                <wistia-player media-id="dupqnl3sfd" aspect="1.7777777777777777">
-                    <div class="wistia_preload_transcript_outer_wrapper" style="width: 100%; height: 100%; display:flex; justify-content:center; align-items: center; margin-top:-56.25%;">
-                        <div class="wistia_preload_transcript_inner_wrapper" style="overflow: auto;">
-                            <p class="wistia_preload_transcript_text" aria-hidden="true" tabindex="-1" style="text-align: justify; font-size: 5px !important;">Hello. My name is Miles Wenzene. I'm the creator of the career guide quiz. If you're here, it's because you're uncertain about the career that you're in, and you've come to the right place. This career guide is designed from a lot of books that I've read, some infused AI support around motivation, inherent personality, life experiences, and deep, deep, deep rooted beliefs that shape your perspective towards specific behaviors. So if you can fill out this quiz, there will be a chat GPT prompt to use the data from this quiz prompted properly with chat GPT, which should give you a clear out</p>
-                        </div>
-                    </div>
-                </wistia-player>
-            </div>
-        </div>
-        
         <!-- Quiz Section -->
         <div class="quiz-section" id="quizSection">
             <div class="quiz-intro">
@@ -642,6 +630,19 @@
                 </div>
                 
                 <p style="margin-top: 20px;">There are <strong>27 scenarios</strong> with <strong>3 statements each</strong>. Rate each statement based on how much you agree or disagree.</p>
+            </div>
+            
+            <!-- Video on Quiz Page -->
+            <div class="video-container">
+                <div class="video-wrapper">
+                    <wistia-player media-id="dupqnl3sfd" aspect="1.7777777777777777">
+                        <div class="wistia_preload_transcript_outer_wrapper" style="width: 100%; height: 100%; display:flex; justify-content:center; align-items: center; margin-top:-56.25%;">
+                            <div class="wistia_preload_transcript_inner_wrapper" style="overflow: auto;">
+                                <p class="wistia_preload_transcript_text" aria-hidden="true" tabindex="-1" style="text-align: justify; font-size: 5px !important;">Hello. My name is Miles Wenzene. I'm the creator of the career guide quiz. If you're here, it's because you're uncertain about the career that you're in, and you've come to the right place. This career guide is designed from a lot of books that I've read, some infused AI support around motivation, inherent personality, life experiences, and deep, deep, deep rooted beliefs that shape your perspective towards specific behaviors. So if you can fill out this quiz, there will be a chat GPT prompt to use the data from this quiz prompted properly with chat GPT, which should give you a clear out</p>
+                            </div>
+                        </div>
+                    </wistia-player>
+                </div>
             </div>
             
             <form id="careerQuiz">
@@ -1108,26 +1109,48 @@ function calculateScores(formData) {
         lifestyle: { entrepreneur: 0, creator: 0, employee: 0 }
     };
     
+    console.log('=== CALCULATING SCORES ===');
+    
     // Section 1: Core Motive (Questions 1-9)
     for (let q = 1; q <= 9; q++) {
-        scores.motive.entrepreneur += parseFloat(formData.get(`q${q}_0`) || 3);
-        scores.motive.creator += parseFloat(formData.get(`q${q}_1`) || 3);
-        scores.motive.employee += parseFloat(formData.get(`q${q}_2`) || 3);
+        const ent = parseFloat(formData.get(`q${q}_0`) || 3);
+        const cre = parseFloat(formData.get(`q${q}_1`) || 3);
+        const emp = parseFloat(formData.get(`q${q}_2`) || 3);
+        
+        console.log(`Q${q}: Entrepreneur=${ent}, Creator=${cre}, Employee=${emp}`);
+        
+        scores.motive.entrepreneur += ent;
+        scores.motive.creator += cre;
+        scores.motive.employee += emp;
     }
+    
+    console.log(`Motive Totals: E=${scores.motive.entrepreneur}, C=${scores.motive.creator}, Emp=${scores.motive.employee}`);
     
     // Section 2: Risk Tolerance (Questions 10-18)
     for (let q = 10; q <= 18; q++) {
-        scores.fear.entrepreneur += parseFloat(formData.get(`q${q}_0`) || 3);
-        scores.fear.creator += parseFloat(formData.get(`q${q}_1`) || 3);
-        scores.fear.employee += parseFloat(formData.get(`q${q}_2`) || 3);
+        const ent = parseFloat(formData.get(`q${q}_0`) || 3);
+        const cre = parseFloat(formData.get(`q${q}_1`) || 3);
+        const emp = parseFloat(formData.get(`q${q}_2`) || 3);
+        
+        scores.fear.entrepreneur += ent;
+        scores.fear.creator += cre;
+        scores.fear.employee += emp;
     }
+    
+    console.log(`Fear Totals: E=${scores.fear.entrepreneur}, C=${scores.fear.creator}, Emp=${scores.fear.employee}`);
     
     // Section 3: Lifestyle (Questions 19-27)
     for (let q = 19; q <= 27; q++) {
-        scores.lifestyle.entrepreneur += parseFloat(formData.get(`q${q}_0`) || 3);
-        scores.lifestyle.creator += parseFloat(formData.get(`q${q}_1`) || 3);
-        scores.lifestyle.employee += parseFloat(formData.get(`q${q}_2`) || 3);
+        const ent = parseFloat(formData.get(`q${q}_0`) || 3);
+        const cre = parseFloat(formData.get(`q${q}_1`) || 3);
+        const emp = parseFloat(formData.get(`q${q}_2`) || 3);
+        
+        scores.lifestyle.entrepreneur += ent;
+        scores.lifestyle.creator += cre;
+        scores.lifestyle.employee += emp;
     }
+    
+    console.log(`Lifestyle Totals: E=${scores.lifestyle.entrepreneur}, C=${scores.lifestyle.creator}, Emp=${scores.lifestyle.employee}`);
     
     // Convert to percentages (max score per section = 45)
     const percentages = {
@@ -1147,6 +1170,8 @@ function calculateScores(formData) {
             employee: ((scores.lifestyle.employee / 45) * 100).toFixed(1)
         }
     };
+    
+    console.log('=== PERCENTAGES ===', percentages);
     
     return percentages;
 }
@@ -1250,7 +1275,7 @@ function createCharts(scores) {
                         scores.motive.creator,
                         scores.motive.employee
                     ],
-                    backgroundColor: '#A855F7'
+                    backgroundColor: '#FF8C42' // Orange
                 },
                 {
                     label: 'Risk Tolerance',
@@ -1259,7 +1284,7 @@ function createCharts(scores) {
                         scores.fear.creator,
                         scores.fear.employee
                     ],
-                    backgroundColor: '#22D3EE'
+                    backgroundColor: '#2ECC71' // Green
                 },
                 {
                     label: 'Lifestyle Priorities',
@@ -1268,7 +1293,7 @@ function createCharts(scores) {
                         scores.lifestyle.creator,
                         scores.lifestyle.employee
                     ],
-                    backgroundColor: '#FB7185'
+                    backgroundColor: '#FF6B9D' // Pink
                 }
             ]
         },
