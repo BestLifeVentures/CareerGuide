@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Guide - Miles Wentzien</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://fast.wistia.com/player.js" async></script>
+    <script src="https://fast.wistia.com/embed/dupqnl3sfd.js" async type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        wistia-player[media-id='dupqnl3sfd']:not(:defined) { 
+            background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/dupqnl3sfd/swatch'); 
+            display: block; 
+            filter: blur(5px); 
+            padding-top:56.25%; 
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --dark-purple: #2D1B4E;
+            --light-purple: #7C5295;
+            --entrepreneur-blue: #4A90E2;
+            --creator-yellow: #F5B041;
+            --employee-purple: #9B59B6;
+            --white: #FFFFFF;
+            --light-gray: #E0E0E0;
+            --medium-gray: #A0A0A0;
+            --shadow: rgba(0, 0, 0, 0.3);
+        }
+        
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background: var(--dark-purple);
+            color: var(--white);
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        .floating-sponsors {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        .sponsor-logo {
+            position: absolute;
+            opacity: 0.08;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--light-purple), var(--entrepreneur-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: floatDown 25s linear infinite;
+            white-space: nowrap;
+        }
+        
+        .sponsor-logo:nth-child(1) { left: 5%; font-size: 2.5rem; animation-delay: 0s; }
+        .sponsor-logo:nth-child(2) { left: 25%; font-size: 3rem; animation-delay: 5s; }
+        .sponsor-logo:nth-child(3) { left: 50%; font-size: 2rem; animation-delay: 10s; }
+        .sponsor-logo:nth-child(4) { left: 75%; font-size: 2.8rem; animation-delay: 15s; }
+        .sponsor-logo:nth-child(5) { left: 15%; font-size: 2.2rem; animation-delay: 20s; }
+        .sponsor-logo:nth-child(6) { left: 60%; font-size: 2.6rem; animation-delay: 7s; }
+        .sponsor-logo:nth-child(7) { left: 35%; font-size: 2.4rem; animation-delay: 13s; }
+        .sponsor-logo:nth-child(8) { left: 85%; font-size: 2.3rem; animation-delay: 18s; }
+        
+        @keyframes floatDown {
+            0% { 
+                top: -10%;
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.08;
+            }
+            90% {
+                opacity: 0.08;
+            }
+            100% { 
+                top: 110%;
+                opacity: 0;
+            }
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeInDown 1s ease-out;
+        }
+        
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+        }
+        
+        .creator {
+            font-size: 1.1rem;
+            color: var(--light-purple);
+            font-weight: 300;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+        
+        .divider {
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(to right, var(--light-purple), var(--entrepreneur-blue));
+            margin: 20px auto;
+        }
+        
+        .video-container {
+            background: rgba(124, 82, 149, 0.2);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 50px;
+            box-shadow: 0 10px 40px var(--shadow);
+            animation: fadeIn 1.2s ease-out 0.3s both;
+            border: 1px solid var(--light-purple);
+        }
+        
+        .video-wrapper {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+        
+        .quiz-section, .results-section {
+            background: rgba(124, 82, 149, 0.15);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 10px 40px var(--shadow);
+            animation: fadeIn 1.4s ease-out 0.5s both;
+            border: 1px solid var(--light-purple);
+        }
+        
+        .quiz-intro {
+            background: linear-gradient(135deg, var(--light-purple), rgba(74, 144, 226, 0.6));
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+        }
+        
+        .quiz-intro h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+        
+        .scale-guide {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+        
+        .form-group {
+            margin-bottom: 35px;
+            animation: slideIn 0.6s ease-out both;
+        }
+        
+        label {
+            display: block;
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: var(--white);
+            margin-bottom: 8px;
+        }
+        
+        .helper-text {
+            font-size: 0.9rem;
+            color: var(--light-gray);
+            font-style: italic;
+            margin-top: 5px;
+        }
+        
+        input[type="text"],
+        input[type="email"] {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid var(--light-purple);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: 'Source Sans Pro', sans-serif;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+        }
+        
+        input[type="text"]::placeholder,
+        input[type="email"]::placeholder {
+            color: var(--medium-gray);
+        }
+        
+        input[type="text"]:focus,
+        input[type="email"]:focus {
+            outline: none;
+            border-color: var(--entrepreneur-blue);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+        }
+        
+        .section-header {
+            background: linear-gradient(to right, var(--light-purple), var(--entrepreneur-blue));
+            color: white;
+            padding: 20px 30px;
+            border-radius: 10px;
+            margin: 40px 0 15px 0;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .section-description {
+            font-style: italic;
+            margin-bottom: 30px;
+            color: var(--light-gray);
+            padding-left: 10px;
+        }
+        
+        .question-group {
+            margin-bottom: 35px;
+            padding: 25px;
+            background: rgba(124, 82, 149, 0.2);
+            border-radius: 10px;
+            border-left: 4px solid var(--light-purple);
+            transition: all 0.3s ease;
+        }
+        
+        .question-group:hover {
+            background: rgba(124, 82, 149, 0.3);
+            box-shadow: 0 5px 15px var(--shadow);
+            transform: translateX(5px);
+        }
+        
+        .question-text {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: var(--white);
+            font-weight: 600;
+        }
+        
+        .sub-question {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            border: 1px solid rgba(124, 82, 149, 0.3);
+        }
+        
+        .sub-question:last-child {
+            margin-bottom: 0;
+        }
+        
+        .sub-question-text {
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            color: var(--light-gray);
+            font-weight: 400;
+        }
+        
+        /* Slider Styles */
+        .slider-container {
+            width: 100%;
+        }
+        
+        .slider-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: var(--medium-gray);
+            margin-top: 8px;
+            padding: 0 5px;
+        }
+        
+        input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 10px;
+            border-radius: 10px;
+            background: linear-gradient(to right, 
+                #e74c3c 0%, 
+                #f39c12 25%, 
+                #f1c40f 50%, 
+                #2ecc71 75%, 
+                #27ae60 100%);
+            outline: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        input[type="range"]:hover {
+            height: 12px;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: var(--white);
+            border: 3px solid var(--light-purple);
+            cursor: grab;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.4);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.15);
+            border-color: var(--entrepreneur-blue);
+            box-shadow: 0 4px 16px rgba(74, 144, 226, 0.5);
+        }
+        
+        input[type="range"]::-webkit-slider-thumb:active {
+            cursor: grabbing;
+            transform: scale(1.25);
+            box-shadow: 0 5px 20px rgba(74, 144, 226, 0.6);
+        }
+        
+        input[type="range"]::-moz-range-thumb {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: var(--white);
+            border: 3px solid var(--light-purple);
+            cursor: grab;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.4);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        input[type="range"]::-moz-range-thumb:hover {
+            transform: scale(1.15);
+            border-color: var(--entrepreneur-blue);
+            box-shadow: 0 4px 16px rgba(74, 144, 226, 0.5);
+        }
+        
+        input[type="range"]::-moz-range-thumb:active {
+            cursor: grabbing;
+            transform: scale(1.25);
+            box-shadow: 0 5px 20px rgba(74, 144, 226, 0.6);
+        }
+        
+        input[type="range"]::-moz-range-track {
+            background: transparent;
+            border: none;
+        }
+        
+        .submit-container {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid var(--light-purple);
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, var(--light-purple), var(--entrepreneur-blue));
+            color: white;
+            border: none;
+            padding: 18px 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 5px 20px rgba(124, 82, 149, 0.4);
+            font-family: 'Source Sans Pro', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(124, 82, 149, 0.6);
+        }
+        
+        .submit-btn:active {
+            transform: translateY(-1px);
+        }
+        
+        /* Results Page Styles */
+        .results-section {
+            display: none;
+        }
+        
+        .results-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .results-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--white);
+            margin-bottom: 10px;
+        }
+        
+        .chart-container {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+            border: 1px solid var(--light-purple);
+        }
+        
+        .chart-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--white);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .chart-wrapper {
+            position: relative;
+            height: 400px;
+        }
+        
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 3px;
+        }
+        
+        .legend-text {
+            color: var(--light-gray);
+            font-size: 0.9rem;
+        }
+        
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .container { padding: 40px 15px; }
+            .quiz-section, .results-section { padding: 25px 20px; }
+            .question-group { padding: 20px 15px; }
+            .chart-wrapper { height: 300px; }
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-sponsors">
+        <div class="sponsor-logo">Magic With Miles</div>
+        <div class="sponsor-logo">Magic With Miles</div>
+        <div class="sponsor-logo">Magic With Miles</div>
+        <div class="sponsor-logo">Magic With Miles</div>
+        <div class="sponsor-logo">Magic With Miles</div>
+        <div class="sponsor-logo">Magic With Miles</div>
+        <div class="sponsor-logo">Magic With Miles</div>
+        <div class="sponsor-logo">Magic With Miles</div>
+    </div>
+    
+    <div class="container">
+        <header>
+            <h1>Career Guide</h1>
+            <p class="creator">created by Miles Wentzien</p>
+            <div class="divider"></div>
+        </header>
+        
+        <div class="video-container">
+            <div class="video-wrapper">
+                <wistia-player media-id="dupqnl3sfd" aspect="1.7777777777777777">
+                    <div class="wistia_preload_transcript_outer_wrapper" style="width: 100%; height: 100%; display:flex; justify-content:center; align-items: center; margin-top:-56.25%;">
+                        <div class="wistia_preload_transcript_inner_wrapper" style="overflow: auto;">
+                            <p class="wistia_preload_transcript_text" aria-hidden="true" tabindex="-1" style="text-align: justify; font-size: 5px !important;">Hello. My name is Miles Wenzene. I'm the creator of the career guide quiz. If you're here, it's because you're uncertain about the career that you're in, and you've come to the right place. This career guide is designed from a lot of books that I've read, some infused AI support around motivation, inherent personality, life experiences, and deep, deep, deep rooted beliefs that shape your perspective towards specific behaviors. So if you can fill out this quiz, there will be a chat GPT prompt to use the data from this quiz prompted properly with chat GPT, which should give you a clear out</p>
+                        </div>
+                    </div>
+                </wistia-player>
+            </div>
+        </div>
+        
+        <!-- Quiz Section -->
+        <div class="quiz-section" id="quizSection">
+            <div class="quiz-intro">
+                <h2>Welcome to Your Career Assessment</h2>
+                <p>This assessment is designed to help you identify your <strong>core professional motives, risk tolerance, and lifestyle priorities</strong>.</p>
+                
+                <div class="scale-guide">
+                    <p><strong>Scale Meaning:</strong></p>
+                    <p><strong>1</strong> – Strongly Disagree | <strong>2</strong> – Disagree | <strong>3</strong> – Neutral | <strong>4</strong> – Agree | <strong>5</strong> – Strongly Agree</p>
+                </div>
+                
+                <p style="margin-top: 20px;">There are <strong>27 scenarios</strong> with <strong>3 statements each</strong>. Rate each statement based on how much you agree or disagree.</p>
+            </div>
+            
+            <form id="careerQuiz">
+                <div class="form-group">
+                    <label for="uniqueId">Unique ID</label>
+                    <input type="text" id="uniqueId" name="uniqueId" placeholder="Optional">
+                    <p class="helper-text">To be able to connect all your quiz data for more accurate responses</p>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required placeholder="your@email.com">
+                    <p class="helper-text">To send you your results</p>
+                </div>
+                
+                <div class="form-group">
+                    <label for="name">Name *</label>
+                    <input type="text" id="name" name="name" required placeholder="Your Name">
+                </div>
+                
+                <div id="questionsContainer"></div>
+                
+                <div class="submit-container">
+                    <button type="submit" class="submit-btn">View Results</button>
+                </div>
+            </form>
+        </div>
+        
+        <!-- Results Section -->
+        <div class="results-section" id="resultsSection">
+            <div class="results-header">
+                <h2>Your Career Profile Results</h2>
+                <p class="helper-text">Based on your responses, here's your breakdown across three dimensions</p>
+            </div>
+            
+            <div class="chart-container">
+                <h3 class="chart-title">Core Motive (The Root Drive)</h3>
+                <div class="chart-wrapper">
+                    <canvas id="motiveChart"></canvas>
+                </div>
+                <div class="legend">
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #4A90E2;"></div>
+                        <span class="legend-text">Entrepreneur (Significance & Legacy)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #F5B041;"></div>
+                        <span class="legend-text">Creator (Authenticity & Connection)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #9B59B6;"></div>
+                        <span class="legend-text">Employee (Competence & Belonging)</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chart-container">
+                <h3 class="chart-title">Risk Tolerance (The Core Fear)</h3>
+                <div class="chart-wrapper">
+                    <canvas id="fearChart"></canvas>
+                </div>
+            </div>
+            
+            <div class="chart-container">
+                <h3 class="chart-title">Lifestyle Priorities (The Root Fuel)</h3>
+                <div class="chart-wrapper">
+                    <canvas id="lifestyleChart"></canvas>
+                </div>
+            </div>
+            
+            <div class="chart-container">
+                <h3 class="chart-title">Complete Profile Overview</h3>
+                <div class="chart-wrapper">
+                    <canvas id="overviewChart"></canvas>
+                </div>
+            </div>
+            
+            <div class="chart-container">
+                <h3 class="chart-title">Stacked Archetype Comparison</h3>
+                <div class="chart-wrapper">
+                    <canvas id="stackedChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+// Quiz Questions Data with exact mapping from scoring logic
+const quizData = {
+    sections: [
+        {
+            id: 1,
+            title: "Section 1: Core Motive (The Root Drive)",
+            description: "These statements explore what drives your sense of purpose and fulfillment at work.",
+            questions: [
+                {
+                    id: 1,
+                    title: "Success Marker",
+                    text: "Rate each statement about how you define professional success:",
+                    options: [
+                        "My greatest professional success is defined by building a scalable system that outlives my involvement.",
+                        "My greatest professional success is defined by creating work that deeply resonates and authentically reflects my personal truth.",
+                        "My greatest professional success is defined by achieving the highest level of mastery in a specialized, defined role."
+                    ]
+                },
+                {
+                    id: 2,
+                    title: "Brilliant Idea",
+                    text: "When you get a brilliant idea, rate how much you agree with each approach:",
+                    options: [
+                        "My first action with a brilliant idea is to develop a strategy to recruit a team and secure resources to execute the system.",
+                        "My first action with a brilliant idea is to immediately begin producing the core output/content, focusing on expression and quality.",
+                        "My first action with a brilliant idea is to present it for structured development and implementation within an existing framework."
+                    ]
+                },
+                {
+                    id: 3,
+                    title: "Fulfillment",
+                    text: "Rate where your deepest sense of fulfillment comes from:",
+                    options: [
+                        "My deepest sense of fulfillment comes from seeing my designed solution solve a complex, large-scale problem for many users/clients.",
+                        "My deepest sense of fulfillment comes from receiving direct, emotional feedback that validates the integrity and impact of my personal expression.",
+                        "My deepest sense of fulfillment comes from successfully delivering a high-quality, complex assignment that meets all specifications and budget."
+                    ]
+                },
+                {
+                    id: 4,
+                    title: "Success Fascination",
+                    text: "When reading about successful people, rate what fascinates you most:",
+                    options: [
+                        "When reading about a successful person, I am most fascinated by the strategic architecture and systems they designed.",
+                        "When reading about a successful person, I am most fascinated by the unique perspective and authentic voice they share.",
+                        "When reading about a successful person, I am most fascinated by the career path, education, and specific skills they used."
+                    ]
+                },
+                {
+                    id: 5,
+                    title: "Project Drive",
+                    text: "Rate your primary motivation for new projects:",
+                    options: [
+                        "My primary motivation for a new project is the potential to instigate change and leave a tangible, independent legacy.",
+                        "My primary motivation for a new project is the opportunity for deep, uncompromised self-expression and connection.",
+                        "My primary motivation for a new project is the clarity of the required tasks and the certainty of fair, defined compensation."
+                    ]
+                },
+                {
+                    id: 6,
+                    title: "Compliment",
+                    text: "Rate which professional compliment would mean the most to you:",
+                    options: [
+                        'The biggest professional compliment I can receive is: "You built something that fundamentally changed the market."',
+                        'The biggest professional compliment I can receive is: "Your work made me feel understood/inspired/changed by your truth."',
+                        'The biggest professional compliment I can receive is: "You are the most reliable, skilled expert we have in this domain."'
+                    ]
+                },
+                {
+                    id: 7,
+                    title: "Security",
+                    text: "Rate what makes you feel professionally significant:",
+                    options: [
+                        "I feel professionally significant knowing I have the agency to create wealth and opportunity through innovation.",
+                        "I feel professionally significant knowing I have a loyal, direct line of communication to my audience or community.",
+                        "I feel professionally significant knowing I have a defined role and clear path for advancement within a structured organization."
+                    ]
+                },
+                {
+                    id: 8,
+                    title: "Unlimited Money",
+                    text: "If you had unlimited money, rate how you would spend your time:",
+                    options: [
+                        "If I had unlimited money, I would spend most of my time finding the next big societal problem to solve by designing a new solution or institution.",
+                        "If I had unlimited money, I would spend most of my time perfecting my craft and freely sharing my unique knowledge/talent with the world.",
+                        "If I had unlimited money, I would spend most of my time taking advanced courses and consulting on specialized, high-impact projects."
+                    ]
+                },
+                {
+                    id: 9,
+                    title: "Project Dilemma",
+                    text: "If your project requires you to run daily operations, rate each approach:",
+                    options: [
+                        "If my project is only profitable if I run all daily operations, I would choose to sell or restructure the project so it can achieve independent scale.",
+                        "If my project is only profitable if I run all daily operations, I would keep running daily operations because the quality requires my unique touch and presence.",
+                        "If my project is only profitable if I run all daily operations, I would offer to manage it as a specialized internal team lead for a guaranteed salary."
+                    ]
+                }
+            ]
+        },
+        {
+            id: 2,
+            title: "Section 2: Risk Tolerance (The Core Fear)",
+            description: "These statements uncover your comfort level with uncertainty, risk, and change.",
+            questions: [
+                {
+                    id: 10,
+                    title: "Financial Fear",
+                    text: "Rate which financial scenario would be hardest to bear:",
+                    options: [
+                        "Losing all personal savings invested in a system's vision would be the hardest financial scenario to bear.",
+                        "Watching my audience/fan base shrink due to lack of relevance would be the hardest financial scenario to bear.",
+                        "Receiving a sudden, significant pay cut or being laid off from a stable role would be the hardest financial scenario to bear."
+                    ]
+                },
+                {
+                    id: 11,
+                    title: "Greatest Fear",
+                    text: "Rate your greatest professional fears:",
+                    options: [
+                        "My greatest professional fear is losing final decision-making authority over the mission (Agency Loss).",
+                        "My greatest professional fear is being filtered, edited, or misunderstood by a dominant platform or structure (Voice Loss).",
+                        "My greatest professional fear is losing my specialized relevance because my established skillset becomes obsolete (Status Loss)."
+                    ]
+                },
+                {
+                    id: 12,
+                    title: "Reputation Bet",
+                    text: "Rate what you would be willing to bet your reputation on:",
+                    options: [
+                        "I would be most willing to bet my entire reputation on a complex system built by my team that I delegated control over.",
+                        "I would be most willing to bet my entire reputation on a piece of art/content that is deeply personal and reflective of my identity.",
+                        "I would be most willing to bet my entire reputation on my ability to pass a rigorous, specialized certification exam."
+                    ]
+                },
+                {
+                    id: 13,
+                    title: "High Risk/Reward",
+                    text: "If a technology has 90% failure rate but 100x payoff potential, rate each approach:",
+                    options: [
+                        "If a technology has a 90% failure rate but offers 100x payoff, I would invest heavily because the systemic opportunity outweighs the risk.",
+                        "If a technology has a 90% failure rate but offers 100x payoff, I would experiment small-scale to use it for content but won't bet the farm on it.",
+                        "If a technology has a 90% failure rate but offers 100x payoff, I would avoid it completely because the high failure rate violates my need for stability."
+                    ]
+                },
+                {
+                    id: 14,
+                    title: "Failure View",
+                    text: "Rate how you view professional failure:",
+                    options: [
+                        "I primarily view professional failure as data (a necessary, non-personal system error) to be corrected.",
+                        "I primarily view professional failure as a painful personal rejection of my identity and expression.",
+                        "I primarily view professional failure as a performance error that threatens my job security and internal status."
+                    ]
+                },
+                {
+                    id: 15,
+                    title: "Ambiguity",
+                    text: "Rate your comfort with high ambiguity:",
+                    options: [
+                        "I am very comfortable operating in a state of high ambiguity (e.g., irregular paychecks) if the vision is being realized.",
+                        "I am moderately comfortable operating in a state of high ambiguity (e.g., irregular paychecks) as long as I'm creating and the audience is growing.",
+                        "I am not comfortable operating in a state of high ambiguity; financial predictability is essential for peace of mind."
+                    ]
+                },
+                {
+                    id: 16,
+                    title: "Criticism",
+                    text: "Rate when criticism feels most personal:",
+                    options: [
+                        "I take criticism most personally when it attacks the execution of my architectural vision or business model.",
+                        "I take criticism most personally when it attacks the authenticity or value of my personal voice or art.",
+                        "I take criticism most personally when it attacks the quality or timeliness of my deliverable output."
+                    ]
+                },
+                {
+                    id: 17,
+                    title: "Disruption",
+                    text: "When your industry faces disruption, rate each response:",
+                    options: [
+                        "When my industry faces massive disruption, I see an opportunity to invent the next industry model and start building it now.",
+                        "When my industry faces massive disruption, I double down on my unique content/voice, as authenticity is the only safe haven.",
+                        "When my industry faces massive disruption, I immediately update my resume and seek stable roles in adjacent sectors."
+                    ]
+                },
+                {
+                    id: 18,
+                    title: "Barrier",
+                    text: "Rate the biggest barriers to starting new projects:",
+                    options: [
+                        "The biggest barrier to starting a new project is not finding the right team or securing the necessary initial capital to fuel the architecture.",
+                        "The biggest barrier to starting a new project is the potential for burnout or running out of things that feel authentic to express.",
+                        "The biggest barrier to starting a new project is the lack of a clear, structured plan and established process for execution."
+                    ]
+                }
+            ]
+        },
+        {
+            id: 3,
+            title: "Section 3: Lifestyle Priorities (The Root Fuel)",
+            description: "These statements reflect how you define balance, fulfillment, and sustainable energy.",
+            questions: [
+                {
+                    id: 19,
+                    title: "Fulfillment Source",
+                    text: "Rate where your fulfillment comes from:",
+                    options: [
+                        "My fulfillment is intrinsically tied to the existence and growth of my creation—it is my legacy.",
+                        "My fulfillment comes from the act of authentic expression and sharing my true self with others.",
+                        "My fulfillment comes from mastering a valuable skill and using it to contribute reliably."
+                    ]
+                },
+                {
+                    id: 20,
+                    title: "Energy Source",
+                    text: "Rate what restores your energy:",
+                    options: [
+                        "My energy is restored by solving complex, systemic problems that were previously blocking the organization's growth.",
+                        "My energy is restored by achieving a state of deep, uninterrupted creative flow (hyperfocus) in my craft.",
+                        "My energy is restored by a period of complete, defined disengagement with no work demands."
+                    ]
+                },
+                {
+                    id: 21,
+                    title: "Freedom",
+                    text: "Rate what true freedom means to you:",
+                    options: [
+                        "True freedom is the autonomy to define the rules and pursue the largest, most ambitious vision possible.",
+                        "True freedom is the freedom of time and financial independence to create what I want, when I want.",
+                        "True freedom is the security and stability that ensures comfort and clear separation from work responsibilities."
+                    ]
+                },
+                {
+                    id: 22,
+                    title: "Rest Meaning",
+                    text: "In moments of complete rest, rate where you find meaning:",
+                    options: [
+                        "In a moment of complete rest, I find the most meaning strategically brainstorming the next 5-year strategy for my endeavor.",
+                        "In a moment of complete rest, I find the most meaning processing and reflecting on my experiences to inform my next unique output/art.",
+                        "In a moment of complete rest, I find the most meaning engaging deeply in a hobby or family life completely separate from my professional world."
+                    ]
+                },
+                {
+                    id: 23,
+                    title: "Motivating State",
+                    text: "Rate which long-term state is most motivating:",
+                    options: [
+                        "The most motivating long-term state is Ambiguity and Chaos—the constant need to architect a new solution.",
+                        "The most motivating long-term state is Emotional Highs and Lows—the necessary range for deep, relatable output.",
+                        "The most motivating long-term state is Order and Predictability—the environment that allows for true mastery and execution."
+                    ]
+                },
+                {
+                    id: 24,
+                    title: "Project Appeal",
+                    text: "Rate what appeals to you most about new projects:",
+                    options: [
+                        "The biggest appeal of a new project is the all-encompassing, demanding challenge to build the structure from the ground up.",
+                        "The biggest appeal of a new project is the opportunity for unrestrained creative control and experimentation.",
+                        "The biggest appeal of a new project is the clear definition of expectations and boundaries that support a sustainable pace."
+                    ]
+                },
+                {
+                    id: 25,
+                    title: "Existential Threat",
+                    text: "Rate your greatest existential threats:",
+                    options: [
+                        "The greatest existential threat is that the world will continue to operate exactly as it is because my vision failed to take root.",
+                        "The greatest existential threat is that I will be forced to sell my integrity for commercial success, betraying my core voice.",
+                        "The greatest existential threat is that I will be seen as incompetent or unreliable by the structure I rely on for security."
+                    ]
+                },
+                {
+                    id: 26,
+                    title: "Energy Spent",
+                    text: "Rate how your personal time and energy are best spent:",
+                    options: [
+                        "My personal time and energy are best spent on learning or networking that directly contributes to the enterprise's survival and growth.",
+                        "My personal time and energy are best spent on deep, passionate pursuit of my craft/art that fuels my unique output.",
+                        "My personal time and energy are best spent on structured personal commitments and self-care that maintain long-term physical and mental capacity."
+                    ]
+                },
+                {
+                    id: 27,
+                    title: "Ambiguous Problem",
+                    text: "When tackling ambiguous problems, rate each approach:",
+                    options: [
+                        "When tackling an ambiguous, messy problem, I dive in and start building the necessary structure immediately, tolerating the chaos.",
+                        "When tackling an ambiguous, messy problem, I research what others are doing to express similar ideas, then find my unique angle.",
+                        "When tackling an ambiguous, messy problem, I wait for the problem to be scoped and broken down into defined, manageable tasks."
+                    ]
+                }
+            ]
+        }
+    ]
+};
+
+// Generate Questions with Sliders
+function generateQuestions() {
+    const container = document.getElementById('questionsContainer');
+    
+    quizData.sections.forEach(section => {
+        const sectionHeader = document.createElement('div');
+        sectionHeader.className = 'section-header';
+        sectionHeader.textContent = section.title;
+        container.appendChild(sectionHeader);
+        
+        const sectionDesc = document.createElement('p');
+        sectionDesc.className = 'section-description';
+        sectionDesc.textContent = section.description;
+        container.appendChild(sectionDesc);
+        
+        section.questions.forEach(question => {
+            const questionGroup = document.createElement('div');
+            questionGroup.className = 'question-group';
+            
+            const questionText = document.createElement('p');
+            questionText.className = 'question-text';
+            questionText.innerHTML = `<strong>${question.title}</strong> — ${question.text}`;
+            questionGroup.appendChild(questionText);
+            
+            question.options.forEach((option, optIndex) => {
+                const subQuestion = document.createElement('div');
+                subQuestion.className = 'sub-question';
+                
+                const subQuestionText = document.createElement('p');
+                subQuestionText.className = 'sub-question-text';
+                subQuestionText.textContent = option;
+                subQuestion.appendChild(subQuestionText);
+                
+                const sliderContainer = document.createElement('div');
+                sliderContainer.className = 'slider-container';
+                
+                const slider = document.createElement('input');
+                slider.type = 'range';
+                slider.min = '1';
+                slider.max = '5';
+                slider.value = '3';
+                slider.step = '0.01';
+                slider.name = `q${question.id}_${optIndex}`;
+                slider.id = `q${question.id}_${optIndex}`;
+                slider.required = true;
+                
+                sliderContainer.appendChild(slider);
+                subQuestion.appendChild(sliderContainer);
+                
+                const sliderLabels = document.createElement('div');
+                sliderLabels.className = 'slider-labels';
+                sliderLabels.innerHTML = '<span>Strongly Disagree</span><span>Neutral</span><span>Strongly Agree</span>';
+                subQuestion.appendChild(sliderLabels);
+                
+                questionGroup.appendChild(subQuestion);
+            });
+            
+            container.appendChild(questionGroup);
+        });
+    });
+}
+
+// Calculate Scores
+function calculateScores(formData) {
+    const scores = {
+        motive: { entrepreneur: 0, creator: 0, employee: 0 },
+        fear: { entrepreneur: 0, creator: 0, employee: 0 },
+        lifestyle: { entrepreneur: 0, creator: 0, employee: 0 }
+    };
+    
+    // Section 1: Core Motive (Questions 1-9)
+    for (let q = 1; q <= 9; q++) {
+        scores.motive.entrepreneur += parseFloat(formData.get(`q${q}_0`) || 3);
+        scores.motive.creator += parseFloat(formData.get(`q${q}_1`) || 3);
+        scores.motive.employee += parseFloat(formData.get(`q${q}_2`) || 3);
+    }
+    
+    // Section 2: Risk Tolerance (Questions 10-18)
+    for (let q = 10; q <= 18; q++) {
+        scores.fear.entrepreneur += parseFloat(formData.get(`q${q}_0`) || 3);
+        scores.fear.creator += parseFloat(formData.get(`q${q}_1`) || 3);
+        scores.fear.employee += parseFloat(formData.get(`q${q}_2`) || 3);
+    }
+    
+    // Section 3: Lifestyle (Questions 19-27)
+    for (let q = 19; q <= 27; q++) {
+        scores.lifestyle.entrepreneur += parseFloat(formData.get(`q${q}_0`) || 3);
+        scores.lifestyle.creator += parseFloat(formData.get(`q${q}_1`) || 3);
+        scores.lifestyle.employee += parseFloat(formData.get(`q${q}_2`) || 3);
+    }
+    
+    // Convert to percentages (max score per section = 45)
+    const percentages = {
+        motive: {
+            entrepreneur: ((scores.motive.entrepreneur / 45) * 100).toFixed(1),
+            creator: ((scores.motive.creator / 45) * 100).toFixed(1),
+            employee: ((scores.motive.employee / 45) * 100).toFixed(1)
+        },
+        fear: {
+            entrepreneur: ((scores.fear.entrepreneur / 45) * 100).toFixed(1),
+            creator: ((scores.fear.creator / 45) * 100).toFixed(1),
+            employee: ((scores.fear.employee / 45) * 100).toFixed(1)
+        },
+        lifestyle: {
+            entrepreneur: ((scores.lifestyle.entrepreneur / 45) * 100).toFixed(1),
+            creator: ((scores.lifestyle.creator / 45) * 100).toFixed(1),
+            employee: ((scores.lifestyle.employee / 45) * 100).toFixed(1)
+        }
+    };
+    
+    return percentages;
+}
+
+// Create Charts
+function createCharts(scores) {
+    const chartConfig = {
+        type: 'bar',
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100,
+                    ticks: {
+                        color: '#E0E0E0',
+                        callback: function(value) {
+                            return value + '%';
+                        }
+                    },
+                    grid: {
+                        color: 'rgba(255, 255, 255, 0.1)'
+                    }
+                },
+                x: {
+                    ticks: {
+                        color: '#E0E0E0'
+                    },
+                    grid: {
+                        color: 'rgba(255, 255, 255, 0.1)'
+                    }
+                }
+            }
+        }
+    };
+    
+    // Chart 1: Core Motive
+    new Chart(document.getElementById('motiveChart'), {
+        ...chartConfig,
+        data: {
+            labels: ['Entrepreneur', 'Creator', 'Employee'],
+            datasets: [{
+                data: [
+                    scores.motive.entrepreneur,
+                    scores.motive.creator,
+                    scores.motive.employee
+                ],
+                backgroundColor: ['#4A90E2', '#F5B041', '#9B59B6']
+            }]
+        }
+    });
+    
+    // Chart 2: Risk Tolerance
+    new Chart(document.getElementById('fearChart'), {
+        ...chartConfig,
+        data: {
+            labels: ['Entrepreneur', 'Creator', 'Employee'],
+            datasets: [{
+                data: [
+                    scores.fear.entrepreneur,
+                    scores.fear.creator,
+                    scores.fear.employee
+                ],
+                backgroundColor: ['#4A90E2', '#F5B041', '#9B59B6']
+            }]
+        }
+    });
+    
+    // Chart 3: Lifestyle
+    new Chart(document.getElementById('lifestyleChart'), {
+        ...chartConfig,
+        data: {
+            labels: ['Entrepreneur', 'Creator', 'Employee'],
+            datasets: [{
+                data: [
+                    scores.lifestyle.entrepreneur,
+                    scores.lifestyle.creator,
+                    scores.lifestyle.employee
+                ],
+                backgroundColor: ['#4A90E2', '#F5B041', '#9B59B6']
+            }]
+        }
+    });
+    
+    // Chart 4: Overview (All 9 categories)
+    new Chart(document.getElementById('overviewChart'), {
+        ...chartConfig,
+        data: {
+            labels: [
+                'Motive: Entr.',
+                'Motive: Creator',
+                'Motive: Empl.',
+                'Fear: Entr.',
+                'Fear: Creator',
+                'Fear: Empl.',
+                'Lifestyle: Entr.',
+                'Lifestyle: Creator',
+                'Lifestyle: Empl.'
+            ],
+            datasets: [{
+                data: [
+                    scores.motive.entrepreneur,
+                    scores.motive.creator,
+                    scores.motive.employee,
+                    scores.fear.entrepreneur,
+                    scores.fear.creator,
+                    scores.fear.employee,
+                    scores.lifestyle.entrepreneur,
+                    scores.lifestyle.creator,
+                    scores.lifestyle.employee
+                ],
+                backgroundColor: [
+                    '#4A90E2', '#F5B041', '#9B59B6',
+                    '#4A90E2', '#F5B041', '#9B59B6',
+                    '#4A90E2', '#F5B041', '#9B59B6'
+                ]
+            }]
+        },
+        options: {
+            ...chartConfig.options,
+            indexAxis: 'y'
+        }
+    });
+    
+    // Chart 5: Stacked (Entrepreneur, Creator, Employee stacked)
+    new Chart(document.getElementById('stackedChart'), {
+        type: 'bar',
+        data: {
+            labels: ['Entrepreneur', 'Creator', 'Employee'],
+            datasets: [
+                {
+                    label: 'Core Motive',
+                    data: [
+                        scores.motive.entrepreneur,
+                        scores.motive.creator,
+                        scores.motive.employee
+                    ],
+                    backgroundColor: '#A855F7'
+                },
+                {
+                    label: 'Risk Tolerance',
+                    data: [
+                        scores.fear.entrepreneur,
+                        scores.fear.creator,
+                        scores.fear.employee
+                    ],
+                    backgroundColor: '#22D3EE'
+                },
+                {
+                    label: 'Lifestyle Priorities',
+                    data: [
+                        scores.lifestyle.entrepreneur,
+                        scores.lifestyle.creator,
+                        scores.lifestyle.employee
+                    ],
+                    backgroundColor: '#FB7185'
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#E0E0E0'
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    stacked: true,
+                    beginAtZero: true,
+                    max: 300,
+                    ticks: {
+                        color: '#E0E0E0',
+                        callback: function(value) {
+                            return value + '%';
+                        }
+                    },
+                    grid: {
+                        color: 'rgba(255, 255, 255, 0.1)'
+                    }
+                },
+                x: {
+                    stacked: true,
+                    ticks: {
+                        color: '#E0E0E0'
+                    },
+                    grid: {
+                        color: 'rgba(255, 255, 255, 0.1)'
+                    }
+                }
+            }
+        }
+    });
+}
+
+// Initialize
+document.addEventListener('DOMContentLoaded', function() {
+    generateQuestions();
+    
+    document.getElementById('careerQuiz').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(this);
+        const scores = calculateScores(formData);
+        
+        // Hide quiz, show results
+        document.getElementById('quizSection').classList.add('hidden');
+        document.getElementById('resultsSection').style.display = 'block';
+        
+        // Create charts
+        createCharts(scores);
+        
+        // Scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        
+        // Send to database (implement your endpoint)
+        sendToDatabase({
+            uniqueId: formData.get('uniqueId'),
+            email: formData.get('email'),
+            name: formData.get('name'),
+            scores: scores
+        });
+    });
+});
+
+function sendToDatabase(data) {
+    // Implement your database submission endpoint here
+    console.log('Results ready for database:', data);
+}
+    </script>
+</body>
+</html>

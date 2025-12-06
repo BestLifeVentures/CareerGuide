@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Alignment Exercise</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #1a2332 0%, #2a3a52 100%);
+            color: #e8e6e3;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 48px;
+            font-weight: 600;
+            color: #e74c3c;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: #b8b4ad;
+        }
+
+        .form-section {
+            background: rgba(37, 51, 69, 0.8);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(231, 76, 60, 0.1);
+        }
+
+        .section-title {
+            font-size: 28px;
+            color: #e74c3c;
+            margin-bottom: 25px;
+            font-weight: 600;
+            border-bottom: 2px solid rgba(231, 76, 60, 0.3);
+            padding-bottom: 15px;
+        }
+
+        .question-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            font-size: 15px;
+            font-weight: 500;
+            color: #e8e6e3;
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        textarea, input[type="text"] {
+            width: 100%;
+            background: rgba(37, 51, 69, 0.6);
+            border: 1px solid rgba(231, 76, 60, 0.3);
+            border-radius: 8px;
+            padding: 12px 16px;
+            color: #e8e6e3;
+            font-family: inherit;
+            font-size: 14px;
+            resize: vertical;
+        }
+
+        textarea {
+            min-height: 100px;
+        }
+
+        textarea:focus, input[type="text"]:focus {
+            outline: none;
+            border-color: #e74c3c;
+            background: rgba(37, 51, 69, 0.8);
+        }
+
+        .char-count {
+            text-align: right;
+            font-size: 12px;
+            color: #b8b4ad;
+            margin-top: 5px;
+        }
+
+        .one-word-input {
+            max-width: 250px;
+        }
+
+        .instruction-message {
+            background: linear-gradient(135deg, rgba(231, 76, 60, 0.15) 0%, rgba(231, 76, 60, 0.05) 100%);
+            border: 2px solid #e74c3c;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .instruction-message p {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .copy-button {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            border: none;
+            padding: 14px 35px;
+            font-size: 15px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .copy-button:hover {
+            opacity: 0.9;
+        }
+
+        .copy-feedback {
+            display: inline-block;
+            margin-left: 15px;
+            color: #e74c3c;
+            font-weight: 500;
+            opacity: 0;
+        }
+
+        .copy-feedback.show {
+            opacity: 1;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #b8b4ad;
+            font-size: 14px;
+        }
+    
+        /* Animated Logo Banners */
+        .banner-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+            opacity: 0.15;
+        }
+
+        .banner {
+            position: absolute;
+            white-space: nowrap;
+            transform: rotate(45deg);
+            animation: slide 20s linear infinite;
+        }
+
+        .banner img {
+            height: 200px;
+            width: auto;
+        }
+
+        .banner:nth-child(1) { top: 5%; left: -100%; }
+        .banner:nth-child(2) { top: 15%; left: -100%; animation-delay: -5s; }
+        .banner:nth-child(3) { top: 25%; left: -100%; animation-delay: -10s; }
+        .banner:nth-child(4) { top: 35%; left: -100%; animation-delay: -15s; }
+        .banner:nth-child(5) { top: 45%; left: -100%; animation-delay: -2s; }
+        .banner:nth-child(6) { top: 55%; left: -100%; animation-delay: -7s; }
+        .banner:nth-child(7) { top: 65%; left: -100%; animation-delay: -12s; }
+        .banner:nth-child(8) { top: 75%; left: -100%; animation-delay: -17s; }
+        .banner:nth-child(9) { top: 85%; left: -100%; animation-delay: -3s; }
+        .banner:nth-child(10) { top: 95%; left: -100%; animation-delay: -8s; }
+
+        @keyframes slide {
+            0% { transform: translateX(0) rotate(45deg); }
+            100% { transform: translateX(200vw) rotate(45deg); }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="banner-container">
+        <div class="banner"><img src="KLM_realty_logo.png" alt="KLM Realty"></div>
+        <div class="banner"><img src="KLM_realty_logo.png" alt="KLM Realty"></div>
+        <div class="banner"><img src="KLM_realty_logo.png" alt="KLM Realty"></div>
+        <div class="banner"><img src="KLM_realty_logo.png" alt="KLM Realty"></div>
+        <div class="banner"><img src="KLM_realty_logo.png" alt="KLM Realty"></div>
+        <div class="banner"><img src="KLM_realty_logo.png" alt="KLM Realty"></div>
+        <div class="banner"><img src="KLM_realty_logo.png" alt="KLM Realty"></div>
+        <div class="banner"><img src="KLM_realty_logo.png" alt="KLM Realty"></div>
+        <div class="banner"><img src="KLM_realty_logo.png" alt="KLM Realty"></div>
+        <div class="banner"><img src="KLM_realty_logo.png" alt="KLM Realty"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>Career Alignment Exercise</h1>
+            <p class="subtitle">Brought to you by KLM Realty</p>
+        </header>
+
+        <form id="careerForm">
+            <div class="form-section">
+                <h2 class="section-title">Part 1: Deep Reflection</h2>
+                
+                <div class="question-group">
+                    <label for="q1">The Ideal Day: Describe, moment by moment, your most professionally fulfilling day in the past year. What specific activities were you doing, and who, if anyone, was around you?</label>
+                    <textarea id="q1" name="q1" maxlength="300"></textarea>
+                    <div class="char-count"><span id="count1">0</span>/300</div>
+                </div>
+
+                <div class="question-group">
+                    <label for="q2">The Hidden Cost: What is the unpopular truth about your work style (e.g., highly disorganized, needs intense quiet, thrives on conflict) that makes you successful but others might find difficult?</label>
+                    <textarea id="q2" name="q2" maxlength="300"></textarea>
+                    <div class="char-count"><span id="count2">0</span>/300</div>
+                </div>
+
+                <div class="question-group">
+                    <label for="q3">The Energy Drain: What is the single greatest energy drain in your current or past work life, and what psychological condition (boredom, lack of control, ethical conflict) causes it?</label>
+                    <textarea id="q3" name="q3" maxlength="300"></textarea>
+                    <div class="char-count"><span id="count3">0</span>/300</div>
+                </div>
+
+                <div class="question-group">
+                    <label for="q4">The Unavoidable Future: Imagine you have unlimited resources and must create a project or system that will define your career legacy. What is the product/mission, and what role do you play in its creation?</label>
+                    <textarea id="q4" name="q4" maxlength="300"></textarea>
+                    <div class="char-count"><span id="count4">0</span>/300</div>
+                </div>
+
+                <div class="question-group">
+                    <label for="q5">The External View: If your most trusted, successful mentor were asked to describe your greatest career blind spot, what would they say it is?</label>
+                    <textarea id="q5" name="q5" maxlength="300"></textarea>
+                    <div class="char-count"><span id="count5">0</span>/300</div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2 class="section-title">Part 1B: Personality & Skill Data</h2>
+                
+                <div class="question-group">
+                    <label for="q6">When solving a problem, do you prioritize Logic or Empathy?</label>
+                    <input type="text" id="q6" name="q6" class="one-word-input">
+                </div>
+
+                <div class="question-group">
+                    <label for="q7">Do you gain energy primarily from Solitude or Interaction?</label>
+                    <input type="text" id="q7" name="q7" class="one-word-input">
+                </div>
+
+                <div class="question-group">
+                    <label for="q8">When working, do you prefer Structure (planning) or Adaptation (flexibility)?</label>
+                    <input type="text" id="q8" name="q8" class="one-word-input">
+                </div>
+
+                <div class="question-group">
+                    <label for="q9">When assessing a situation, are you driven by the Concrete (facts) or the Abstract (patterns)?</label>
+                    <input type="text" id="q9" name="q9" class="one-word-input">
+                </div>
+
+                <div class="question-group">
+                    <label for="q10">In a meeting, are you more likely to Initiate the discussion or Reflect before speaking?</label>
+                    <input type="text" id="q10" name="q10" class="one-word-input">
+                </div>
+
+                <h3 style="margin-top: 30px; margin-bottom: 20px; color: #e74c3c; font-size: 20px;">Core Skill Data</h3>
+                
+                <div class="question-group">
+                    <label for="q11">My most commercially valuable hard skill is [One Noun/Verb]</label>
+                    <input type="text" id="q11" name="q11" class="one-word-input">
+                </div>
+
+                <div class="question-group">
+                    <label for="q12">My most effective soft skill is [One Noun/Verb]</label>
+                    <input type="text" id="q12" name="q12" class="one-word-input">
+                </div>
+
+                <div class="question-group">
+                    <label for="q13">I am most frustrated when I cannot [One Verb] a situation</label>
+                    <input type="text" id="q13" name="q13" class="one-word-input">
+                </div>
+
+                <div class="question-group">
+                    <label for="q14">I seek to spend 80% of my time [One Verb]</label>
+                    <input type="text" id="q14" name="q14" class="one-word-input">
+                </div>
+
+                <div class="question-group">
+                    <label for="q15">The output I produce is best described as [One Noun]</label>
+                    <input type="text" id="q15" name="q15" class="one-word-input">
+                </div>
+            </div>
+
+            <div class="instruction-message">
+                <p>Copy Response. Then Paste into AI chat</p>
+                <button type="button" class="copy-button" onclick="copyAllContent()">Copy All Responses</button>
+                <span class="copy-feedback" id="copyFeedback">✓ Copied!</span>
+            </div>
+        </form>
+
+        <footer>
+            <p>Sponsored by KLM REALTY</p>
+        </footer>
+    </div>
+
+    <div id="segment2-content" style="display:none;">
+You are a career psychology analyst specializing in intrinsic motivation and work structure alignment. Your goal is to analyze the user's psychological drivers and apply that analysis to define the optimal professional structure for sustained fulfillment, success, and value delivery.
+
+The user will provide two primary data sets:
+* Alignment Blueprint Scores: 81 ratings (1-5 scale) across Motive, Risk, and Lifestyle.
+* Talent & Focus Inventory: Open-text responses for Talent, Values, and Interests.
+
+Your response to the user must be structured into five distinct parts to ensure a deep, actionable analysis.
+
+The Alignment Blueprint Analysis (Part 1 Execution)
+Analyze the user's 81 scores.
+
+2A. Root Psychological Drive Analysis
+Analyze the statements for each psychological category (Motive, Risk, Lifestyle) where the user scored 4 or 5.
+* For each of the 9 statements where the user scored a 5, write one sentence explaining the specific career structure element this reveals (e.g., "This requires autonomy over problem selection," or "This demands a feedback loop focused on system stability").
+
+2B. Core Structural Requirements Synthesis
+Provide a combined paragraph synthesizing the highest alignment percentages (e.g., Motive V_A at 85%, Risk V_B at 70%, etc.) into the user's core structural requirements. This paragraph should be the ultimate definition of their non-negotiable professional environment.
+
+3. 🎯 Structure Alignment Ratings (Part 2 Execution)
+Calculate the user's overall alignment with the three structures based only on the Alignment Blueprint scores.
+* Rate the user's alignment (1-10) with the three work structures below.
+* For each structure, provide a concise explanation for the rating and detail what fundamental psychological needs it meets/fails to meet.
+* Business Owner (creating team/system, controlling mission and strategy)
+* Creator (producing content/products sharing my viewpoint)
+* Employee (working within another organization)
+
+4. 🛠️ Success Requirements (Part 3 Execution)
+Provide 6-8 specific, actionable requirements for the user to succeed within each of the three work structures, tailored to their psychological profile.
+* Use the highest percentage vectors (e.g., Motive V_A, Risk V_C, Lifestyle V_B) to define the requirements.
+* Address the following domains for each structure: Mission/problem selection, Value delivery/Delegation, Leverage/Scale, Authentic Expression, Feedback loop, Failure modes, Success metrics, and Boundaries.
+* For any structure rated 5/10 or lower, include an honest "Reality Check" paragraph detailing the fundamental misalignments that must be mitigated or accepted.
+
+5. 🌟 Final Synthesis (The Capstone)
+Integrate the Talent & Focus Inventory and the soon-to-be-provided Personality/Skill Data with the Alignment Blueprint analysis. Conclude with a final, prescriptive statement defining the user's optimal professional path:
+* Final Statement: A one-sentence definition of their most aligned professional identity and structure.
+* Next Steps: Suggest the most immediate, high-leverage action the user should take based on the results.
+    </div>
+
+    <script>
+        // Character counters
+        for (let i = 1; i <= 5; i++) {
+            document.getElementById('q' + i).addEventListener('input', function() {
+                document.getElementById('count' + i).textContent = this.value.length;
+            });
+        }
+
+        // Copy function
+        function copyAllContent() {
+            const form = document.getElementById('careerForm');
+            const formData = new FormData(form);
+            
+            let text = "=== SEGMENT 1: CAREER ALIGNMENT RESPONSES ===\n\n";
+            text += "THE IDEAL DAY:\n" + (formData.get('q1') || '[Not answered]') + "\n\n";
+            text += "THE HIDDEN COST:\n" + (formData.get('q2') || '[Not answered]') + "\n\n";
+            text += "THE ENERGY DRAIN:\n" + (formData.get('q3') || '[Not answered]') + "\n\n";
+            text += "THE UNAVOIDABLE FUTURE:\n" + (formData.get('q4') || '[Not answered]') + "\n\n";
+            text += "THE EXTERNAL VIEW:\n" + (formData.get('q5') || '[Not answered]') + "\n\n";
+            text += "=== PERSONALITY & SKILL DATA ===\n\n";
+            text += "Problem solving approach: " + (formData.get('q6') || '[Not answered]') + "\n";
+            text += "Energy source: " + (formData.get('q7') || '[Not answered]') + "\n";
+            text += "Work preference: " + (formData.get('q8') || '[Not answered]') + "\n";
+            text += "Assessment driver: " + (formData.get('q9') || '[Not answered]') + "\n";
+            text += "Meeting style: " + (formData.get('q10') || '[Not answered]') + "\n\n";
+            text += "Most valuable hard skill: " + (formData.get('q11') || '[Not answered]') + "\n";
+            text += "Most effective soft skill: " + (formData.get('q12') || '[Not answered]') + "\n";
+            text += "Most frustrated when I cannot: " + (formData.get('q13') || '[Not answered]') + "\n";
+            text += "80% of time spent: " + (formData.get('q14') || '[Not answered]') + "\n";
+            text += "Output best described as: " + (formData.get('q15') || '[Not answered]') + "\n\n";
+            text += document.getElementById('segment2-content').textContent;
+            
+            navigator.clipboard.writeText(text).then(function() {
+                const feedback = document.getElementById('copyFeedback');
+                feedback.classList.add('show');
+                setTimeout(function() {
+                    feedback.classList.remove('show');
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>
